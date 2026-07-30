@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MPK GANESPIC XXV — Interactive Mindmap & Structure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="shortcut icon" href="Logo_xxvganespic.png" type="image/x-icon">
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <span class="logo"><img src="Logo_xxvganespic.png" alt="Logo-GANESPIC" class="logo"></span><br>
+      <span class="brand-badge">ANGKATAN XXV</span>
+      <p class="motto" style="font-size: 1.8em;">Melangkah Kedepan Menuju Kemenangan</p>
+      <h1>Majelis Perwakilan Kelas GANESPIC</h1>
+    </header>
+
+    <!-- Controls -->
+    <div class="controls">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('utsman', this)">Gedung Utsman</button>
+        <button class="tab-btn" onclick="switchTab('tansri', this)">Gedung Tansri</button>
+      </div>
+    </div>
+
+    <!-- GEDUNG UTSMAN -->
+    <div id="utsman" class="tab-content active">
+      <div class="section-title">Struktural Gedung Utsman</div>
+      
+      <div class="mindmap-wrapper">
+        <svg class="mindmap-svg" id="svg-utsman"></svg>
+        
+        <div class="mindmap-tree">
+          <div class="node root" id="u-root">
+            <div class="role">Ketua Angkatan XXV</div>
+            <div class="name" id="u-ka">Nama Ketua Angkatan</div>
+          </div>
+
+          <div class="node ketua-gedung" id="u-ketua">
+            <div class="role">Ketua MPK Gedung Utsman</div>
+            <div class="name" id="u-kgedung">Nama Ketua Gedung</div>
+          </div>
+
+          <div class="branches">
+            <div class="node" id="u-wakil">
+              <div class="role">Wakil Ketua</div>
+              <div class="name" id="u-wakil-name">Nama Wakil</div>
+            </div>
+            <div class="node" id="u-sekretaris">
+              <div class="role">Sekretaris</div>
+              <div class="name" id="u-sekretaris-name">Nama Sekretaris</div>
+            </div>
+            <div class="node" id="u-bendahara">
+              <div class="role">Bendahara</div>
+              <div class="name" id="u-bendahara-name">Nama Bendahara</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">Daftar Divisi</div>
+      <div class="division-grid" id="list-utsman"></div>
+    </div>
+
+    <!-- GEDUNG TANSRI -->
+    <div id="tansri" class="tab-content">
+      <div class="section-title">Struktural Gedung Tansri</div>
+      
+      <div class="mindmap-wrapper">
+        <svg class="mindmap-svg" id="svg-tansri"></svg>
+        
+        <div class="mindmap-tree">
+          <div class="node root" id="t-root">
+            <div class="role">Ketua Angkatan XXV</div>
+            <div class="name" id="t-ka"></div>
+          </div>
+
+          <div class="node ketua-gedung" id="t-ketua">
+            <div class="role">Ketua MPK Gedung Tansri</div>
+            <div class="name" id="t-kgedung"></div>
+          </div>
+
+          <div class="branches">
+            <div class="node" id="t-wakil">
+              <div class="role">Wakil Ketua</div>
+              <div class="name" id="t-wakil-name">Nama Wakil</div>
+            </div>
+            <div class="node" id="t-sekretaris">
+              <div class="role">Sekretaris</div>
+              <div class="name" id="t-sekretaris-name">Nama Sekretaris</div>
+            </div>
+            <div class="node" id="t-bendahara">
+              <div class="role">Bendahara</div>
+              <div class="name" id="t-bendahara-name">Nama Bendahara</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">Daftar Divisi</div>
+      <div class="division-grid" id="list-tansri"></div>
+    </div>
+  </div>
+<script src="script.js"></script>
+</body>
+</html>
