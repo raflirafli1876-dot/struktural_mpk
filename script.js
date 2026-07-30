@@ -1,148 +1,294 @@
+/**
+ * MPK GANESPIC XXV — Interactive Mindmap & Structure
+ * Cleaned and refactored logic.
+ */
+
+// Data Struktural MPK Ganespic
 const dataMPK = {
-            ketuaAngkatan: "Danish Mirza",
-  
-        // ================= GEDUNG UTSMAN =================
-          utsman: {
-          bph: { 
-          ketua: "Danish Mirza", 
-          wakil: "Wakil Utsman", 
-      sekretaris: "Sekretaris Utsman", 
-      bendahara: "Bendahara Utsman" 
+  ketuaAngkatan: "Danish Mirza",
+  fotoKetuaAngkatan: "img/Danish Mirza.png",
+
+  // ================= GEDUNG UTSMAN =================
+  utsman: {
+    bph: {
+      ketua: { nama: "Danish Mirza", foto: "img/Danish Mirza.png" },
+      wakil: [
+        { nama: "Arfina Tiara Khalisa", foto: "img/Arfina Tiara.png" },
+        { nama: "Ahmad Firdaus Al Farizi", foto: "img/ahmad firdaus.png" }
+      ],
+      sekretaris: [
+        { nama: "Ilyas Rasyidin", foto: "" },
+        { nama: "Nama Sekretaris 2", foto: "" },
+        { nama: "Nama Sekretaris 3", foto: "" }
+      ],
+      bendahara: [
+        { nama: "Salma Alfu Hasani", foto: "" },
+        { nama: "Hanif Abdullah Arsyad", foto: "" },
+        { nama: "Nama Bendahara 3", foto: "" }
+      ]
     },
     divisi: [
       {
         id: 1,
-        nama: "Divisi Keagamaan",
-        menteri: "Ahmad Subarjo",
-        wakil: "Budi Santoso",
-        staf: ["Caca", "Dedi", "Eka", "Fani", "Gita"]
+        nama: "Divisi Humas",
+        menteri: "M Ausa'a Nazhoron ",
+        fotoMenteri: "", 
+        wakil: "Nadia Kholifatun Nisa",
+        fotoWakil: "",
+        staf: []
       },
       {
         id: 2,
-        nama: "Divisi Humas",
-        menteri: "Hendra",
-        wakil: "Indah",
-        staf: ["Joko", "Kiki", "Lani"]
+        nama: "Divisi Ekonomi",
+        menteri: "Syifa Khoirunnisa",
+        fotoMenteri: "",
+        wakil: "Muhammad Fadhli Akbar",
+        fotoWakil: "",
+        staf: []
       }
-      // Tinggal koma (,) lalu tambah divisi ke-3, 4, dst...
     ]
   },
 
   // ================= GEDUNG TANSRI =================
   tansri: {
-    bph: { 
-      ketua: "Attaya Fikri Rizqullah Sitompul", 
-      wakil: "Maulida", 
-      sekretaris: "orang", 
-      bendahara: "orang" 
+    bph: {
+      ketua: { nama: "Attaya Fikri Rizqullah Sitompul", foto: "" },
+      wakil: [
+        { nama: "Maulida", foto: "" }
+      ],
+      sekretaris: [
+        { nama: "orang", foto: "" },
+        { nama: "manusia", foto:""}
+      ],
+      bendahara: [
+        { nama: "orang", foto: "" }
+      ]
     },
-    // SAMA JUGA DI SINI:
     divisi: [
       {
         id: 1,
-        nama: "Divisi Bela Negara",
-        menteri: "Mita",
-        wakil: "Nico",
-        staf: ["Oki", "Putri", "Rian"]
+        nama: "Divisi Humas",
+        menteri: "Ananda Satria Rinjanie ",
+        fotoMenteri: "",
+        wakil: "Syafa Khusnul Kamila",
+        fotoWakil: "",
+        staf: []
+      },
+      {
+        id: 2,
+        nama: "Divisi Ekonomi",
+        menteri: "Sulton Hidayat",
+        fotoMenteri: "",
+        wakil: "Anugerah Rizky Aulia",
+        fotoWakil: "",
+        staf: [] 
       }
     ]
   }
 };
 
-    let activeGedung = 'utsman';
+// State gedung aktif
+let activeGedung = 'utsman';
 
-    function renderDivisi(elementId, listDivisi) {
-      const el = document.getElementById(elementId);
-      el.innerHTML = listDivisi.map(div => `
-        <div class="div-card">
-          <div class="staff-popover">
-            <div class="popover-title">
-              <span>Daftar Staf / Partner</span>
-              <span>${div.staf.length} Orang</span>
-            </div>
-            <div class="staff-list">
-              ${div.staf.map(s => `<div class="staff-item">• ${s}</div>`).join('')}
-            </div>
-          </div>
+// Inline SVG Avatar default yang indah (Gradient Biru dengan siluet modern)
+const DEFAULT_AVATAR = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'><rect width='100' height='100' rx='50' fill='url(%23gradient)'/><path d='M50 30a14 14 0 1 0 0 28 14 14 0 0 0 0-28zm0 34c-16.57 0-30 8.06-30 18v2h60v-2c0-9.94-13.43-18-30-18z' fill='%23ffffff' opacity='0.85'/><defs><linearGradient id='gradient' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%233b82f6'/><stop offset='100%25' stop-color='%231d4ed8'/></linearGradient></defs></svg>`;
 
-          <div class="div-header">
-            <span class="div-title">${div.nama}</span>
-            <span class="div-badge">#${div.id}</span>
-          </div>
-          <div class="member-row">
-            <span class="member-label">Menteri:</span>
-            <span class="member-name">${div.menteri}</span>
-          </div>
-          <div class="member-row">
-            <span class="member-label">Wakil Menteri:</span>
-            <span class="member-name">${div.wakil}</span>
-          </div>
+/**
+ * Mendapatkan source avatar gambar.
+ * Jika kosong, mengembalikan avatar default.
+ */
+function getAvatarSrc(src) {
+  if (!src || src.trim() === "") {
+    return DEFAULT_AVATAR;
+  }
+  // Koreksi path apabila merujuk ke root langsung
+  if (src === "Logo_xxvganespic.png") {
+    return "img/Logo_xxvganespic.png";
+  }
+  return src;
+}
+
+/**
+ * Me-render daftar divisi ke dalam DOM.
+ */
+function renderDivisi(elementId, listDivisi) {
+  const el = document.getElementById(elementId);
+  if (!el) return;
+
+  el.innerHTML = listDivisi.map(div => `
+    <div class="div-card">
+      <div class="staff-popover">
+        <div class="popover-title">
+          <span>Daftar Staf / Partner</span>
+          <span>${div.staf ? div.staf.length : 0} Orang</span>
         </div>
-      `).join('');
+        <div class="staff-list">
+          ${div.staf && div.staf.length > 0
+            ? div.staf.map(s => `<div class="staff-item">• ${s}</div>`).join('')
+            : '<div class="staff-item">Tidak ada staf</div>'
+          }
+        </div>
+      </div>
+
+      <div class="div-header">
+        <span class="div-title">${div.nama}</span>
+        <span class="div-badge">#${div.id}</span>
+      </div>
+
+      <div class="div-members-grid">
+        <!-- Menteri -->
+        <div class="member-box">
+          <img src="${getAvatarSrc(div.fotoMenteri)}" alt="${div.menteri}" class="member-avatar">
+          <div class="member-label">Menteri</div>
+          <div class="member-name">${div.menteri}</div>
+        </div>
+
+        <!-- Wakil Menteri -->
+        <div class="member-box">
+          <img src="${getAvatarSrc(div.fotoWakil)}" alt="${div.wakil}" class="member-avatar">
+          <div class="member-label">Wakil Menteri</div>
+          <div class="member-name">${div.wakil}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+/**
+ * Menghubungkan dua node dalam SVG menggunakan path bezier.
+ */
+function connectNodes(svgId, node1Id, node2Id) {
+  const svg = document.getElementById(svgId);
+  const n1 = document.getElementById(node1Id);
+  const n2 = document.getElementById(node2Id);
+
+  if (!n1 || !n2 || !svg) return;
+
+  const svgRect = svg.getBoundingClientRect();
+  const r1 = n1.getBoundingClientRect();
+  const r2 = n2.getBoundingClientRect();
+
+  // Posisi x1, y1 (tengah bawah node 1)
+  const x1 = (r1.left + r1.width / 2) - svgRect.left;
+  const y1 = r1.bottom - svgRect.top;
+  
+  // Posisi x2, y2 (tengah atas node 2)
+  const x2 = (r2.left + r2.width / 2) - svgRect.left;
+  const y2 = r2.top - svgRect.top;
+
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  const d = `M ${x1} ${y1} C ${x1} ${(y1 + y2) / 2}, ${x2} ${(y1 + y2) / 2}, ${x2} ${y2}`;
+  path.setAttribute("d", d);
+  svg.appendChild(path);
+}
+
+/**
+ * Menggambar semua garis penghubung mindmap.
+ */
+function drawMindmapLines() {
+  const svgId = 'mindmap-svg';
+  const svg = document.getElementById(svgId);
+  if (!svg) return;
+  
+  svg.innerHTML = '';
+
+  // Hubungkan Root -> Ketua Gedung
+  connectNodes(svgId, 'node-root', 'node-ketua');
+
+  const data = dataMPK[activeGedung];
+  if (!data) return;
+
+  const roles = [
+    { key: 'wakil', idPrefix: 'wakil' },
+    { key: 'sekretaris', idPrefix: 'sekretaris' },
+    { key: 'bendahara', idPrefix: 'bendahara' }
+  ];
+
+  roles.forEach(role => {
+    const list = data.bph[role.key];
+    if (list && list.length > 0) {
+      // Hubungkan Ketua Gedung -> Node Pertama di Kolom ini
+      connectNodes(svgId, 'node-ketua', `node-${role.idPrefix}-0`);
+
+      // Hubungkan antar node di dalam kolom secara vertikal
+      for (let i = 0; i < list.length - 1; i++) {
+        connectNodes(svgId, `node-${role.idPrefix}-${i}`, `node-${role.idPrefix}-${i + 1}`);
+      }
     }
+  });
+}
 
-    function connectNodes(svgId, node1Id, node2Id) {
-      const svg = document.getElementById(svgId);
-      const n1 = document.getElementById(node1Id);
-      const n2 = document.getElementById(node2Id);
+/**
+ * Merender satu kolom BPH (Wakil, Sekretaris, Bendahara) secara dinamis.
+ */
+function renderBphColumn(columnId, roleLabel, members, idPrefix) {
+  const colEl = document.getElementById(columnId);
+  if (!colEl) return;
 
-      if(!n1 || !n2 || !svg) return;
+  colEl.innerHTML = members.map((member, idx) => `
+    <div class="node" id="node-${idPrefix}-${idx}">
+      <img src="${getAvatarSrc(member.foto)}" alt="${roleLabel}" class="node-avatar">
+      <div class="role">${roleLabel}</div>
+      <div class="name">${member.nama}</div>
+    </div>
+  `).join('');
+}
 
-      const svgRect = svg.getBoundingClientRect();
-      const r1 = n1.getBoundingClientRect();
-      const r2 = n2.getBoundingClientRect();
+/**
+ * Memuat dan meng-update DOM dengan data gedung terpilih.
+ */
+function renderGedung(gedungId) {
+  const data = dataMPK[gedungId];
+  if (!data) return;
 
-      const x1 = (r1.left + r1.width / 2) - svgRect.left;
-      const y1 = r1.bottom - svgRect.top;
-      const x2 = (r2.left + r2.width / 2) - svgRect.left;
-      const y2 = r2.top - svgRect.top;
+  // Render Title Gedung
+  const titleText = gedungId === 'utsman' ? 'Struktural Gedung Utsman' : 'Struktural Gedung Tansri';
+  document.getElementById('gedung-title').textContent = titleText;
 
-      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-      const d = `M ${x1} ${y1} C ${x1} ${(y1 + y2)/2}, ${x2} ${(y1 + y2)/2}, ${x2} ${y2}`;
-      path.setAttribute("d", d);
-      svg.appendChild(path);
-    }
+  // Render Ketua Angkatan (Root)
+  document.getElementById('ka-img').src = getAvatarSrc(dataMPK.fotoKetuaAngkatan);
+  document.getElementById('ka-name').textContent = dataMPK.ketuaAngkatan;
 
-    function drawMindmapLines(gedung) {
-      const prefix = gedung === 'utsman' ? 'u' : 't';
-      const svgId = `svg-${gedung}`;
-      const svg = document.getElementById(svgId);
-      svg.innerHTML = '';
+  // Render Ketua Gedung
+  document.getElementById('kgedung-img').src = getAvatarSrc(data.bph.ketua.foto);
+  document.getElementById('kgedung-name').textContent = data.bph.ketua.nama;
+  document.getElementById('kgedung-role').textContent = `Ketua MPK Gedung ${gedungId.charAt(0).toUpperCase() + gedungId.slice(1)}`;
 
-      connectNodes(svgId, `${prefix}-root`, `${prefix}-ketua`);
-      connectNodes(svgId, `${prefix}-ketua`, `${prefix}-wakil`);
-      connectNodes(svgId, `${prefix}-ketua`, `${prefix}-sekretaris`);
-      connectNodes(svgId, `${prefix}-ketua`, `${prefix}-bendahara`);
-    }
+  // Render Wakil, Sekretaris, Bendahara secara dinamis
+  renderBphColumn('col-wakil', 'Wakil Ketua', data.bph.wakil, 'wakil');
+  renderBphColumn('col-sekretaris', 'Sekretaris', data.bph.sekretaris, 'sekretaris');
+  renderBphColumn('col-bendahara', 'Bendahara', data.bph.bendahara, 'bendahara');
 
-    function loadData() {
-      document.getElementById('u-ka').textContent = dataMPK.ketuaAngkatan;
-      document.getElementById('u-kgedung').textContent = dataMPK.utsman.bph.ketua;
-      document.getElementById('u-wakil-name').textContent = dataMPK.utsman.bph.wakil;
-      document.getElementById('u-sekretaris-name').textContent = dataMPK.utsman.bph.sekretaris;
-      document.getElementById('u-bendahara-name').textContent = dataMPK.utsman.bph.bendahara;
-      renderDivisi('list-utsman', dataMPK.utsman.divisi);
+  // Render Daftar Divisi
+  renderDivisi('list-divisi', data.divisi);
 
-      document.getElementById('t-ka').textContent = dataMPK.ketuaAngkatan;
-      document.getElementById('t-kgedung').textContent = dataMPK.tansri.bph.ketua;
-      document.getElementById('t-wakil-name').textContent = dataMPK.tansri.bph.wakil;
-      document.getElementById('t-sekretaris-name').textContent = dataMPK.tansri.bph.sekretaris;
-      document.getElementById('t-bendahara-name').textContent = dataMPK.tansri.bph.bendahara;
-      renderDivisi('list-tansri', dataMPK.tansri.divisi);
+  // Gambar ulang garis setelah DOM selesai me-layout
+  setTimeout(drawMindmapLines, 100);
+}
 
-      setTimeout(() => { drawMindmapLines('utsman'); }, 100);
-    }
+// Inisialisasi Event Listener
+document.addEventListener('DOMContentLoaded', () => {
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const gedungId = btn.getAttribute('data-gedung');
+      if (!gedungId) return;
 
-    function switchTab(gedungId, btn) {
+      // Update state
       activeGedung = gedungId;
-      document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(tb => tb.classList.remove('active'));
-      
-      document.getElementById(gedungId).classList.add('active');
+
+      // Ganti class active pada tab button
+      tabBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
-      setTimeout(() => { drawMindmapLines(gedungId); }, 50);
-    }
+      // Render gedung terpilih
+      renderGedung(activeGedung);
+    });
+  });
 
-    window.addEventListener('resize', () => { drawMindmapLines(activeGedung); });
-    window.onload = loadData;
+  // Load awal data
+  renderGedung(activeGedung);
+});
+
+// Gambar ulang garis saat resize window
+window.addEventListener('resize', drawMindmapLines);
