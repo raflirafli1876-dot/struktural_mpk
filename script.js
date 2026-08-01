@@ -102,10 +102,10 @@ const dataMPK = {
       {
         id: 9,
         nama: "Divisi Kebahasaan",
-        menteri: "Radit Dwi Rahman",
-        fotoMenteri: "img/radit.png", 
-        wakil: "Jihan Mutia Ardhaneswari ",
-        fotoWakil: "img/jihan mutia.png",
+        menteri: "Jihan Mutia Ardhaneswari ",
+        fotoMenteri: "img/jihan mutia.png", 
+        wakil: "Radit Dwi Rahman",
+        fotoWakil: "img/radit.png",
         staf: []
       },
       {
@@ -221,10 +221,10 @@ const dataMPK = {
       {
         id: 10,
         nama: "Divisi Informasi Dokumentasi",
-        menteri: "Madina Sya'bani Rahman ",
-        fotoMenteri: "img/madina.png",
-        wakil: "Khodad Asidad",
-        fotoWakil: "img/khodad.png",
+        menteri: "Khodad Asidad",
+        fotoMenteri: "img/khodad.png",
+        wakil: "Madina Sya'bani Rahman ",
+        fotoWakil: "img/madina.png",
         staf: ["Rafli Adzanur Ramadhan"]
       }
     ]
