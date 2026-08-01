@@ -17,14 +17,13 @@ const dataMPK = {
         { nama: "Ahmad Firdaus Al Farizi", foto: "img/ahmad firdaus.png" }
       ],
       sekretaris: [
-        { nama: "Ilyas Rasyidin", foto: "" },
-        { nama: "Nama Sekretaris 2", foto: "" },
-        { nama: "Nama Sekretaris 3", foto: "" }
+        { nama: "Ilyas Rasyidin", foto: "img/ilyas.png" },
+        { nama: "Jian Kayla Alisyah", foto: "img/jian kayla.png" },
+        { nama: "Farras Putri Ardhiyanti ", foto: "img/farras.png" }
       ],
       bendahara: [
-        { nama: "Salma Alfu Hasani", foto: "" },
-        { nama: "Hanif Abdullah Arsyad", foto: "" },
-        { nama: "Nama Bendahara 3", foto: "" }
+        { nama: "Salma Alfu Hasani", foto: "img/salma alfu.png" },
+        { nama: "Hanif Abdullah Arsyad", foto: "img/hanif.png" }
       ]
     },
     divisi: [
@@ -32,18 +31,90 @@ const dataMPK = {
         id: 1,
         nama: "Divisi Humas",
         menteri: "M Ausa'a Nazhoron ",
-        fotoMenteri: "", 
+        fotoMenteri: "img/m ausa.png", 
         wakil: "Nadia Kholifatun Nisa",
-        fotoWakil: "",
+        fotoWakil: "img/nadia kholifatun.png",
         staf: []
       },
       {
         id: 2,
         nama: "Divisi Ekonomi",
         menteri: "Syifa Khoirunnisa",
-        fotoMenteri: "",
+        fotoMenteri: "img/syifa khoirunnisa.png",
         wakil: "Muhammad Fadhli Akbar",
-        fotoWakil: "",
+        fotoWakil: "img/m fadhli.png",
+        staf: []
+      },
+      {
+        id: 3,
+        nama: "Divisi Peribadatan",
+        menteri: "Al Ahmad Fayyadh Abqari",
+        fotoMenteri: "img/ahmad.png", 
+        wakil: "Hanisa Mulyawati binti",
+        fotoWakil: "img/hanisa.png",
+        staf: []
+      },
+      {
+        id: 4,
+        nama: "Divisi Disterham",
+        menteri: "Rafka Hadi Firmansyah ",
+        fotoMenteri: "img/rafka.png", 
+        wakil: "Futri Amelia Sari binti",
+        fotoWakil: "img/futri amelia.png",
+        staf: []
+      },
+      {
+        id: 5,
+        nama: "Divisi Sora",
+        menteri: "Amania Safina Khalisha",
+        fotoMenteri: "img/amania safina.png", 
+        wakil: "Akmal Kafabi",
+        fotoWakil: "img/akmal kafabi.png",
+        staf: []
+      },
+      {
+        id: 6,
+        nama: "Divisi Ekstrakulikuler",
+        menteri: "Muhamad Ibra ",
+        fotoMenteri: "img/ibra.png", 
+        wakil: "Tia Listiyana Putri",
+        fotoWakil: "img/tia.png",
+        staf: []
+      },
+      {
+        id: 7,
+        nama: "Divisi Gizi Kesehatan",
+        menteri: "Irsal Auliya Yustiawan",
+        fotoMenteri: "img/irsal.png", 
+        wakil: "Fatihah Rizqia Khasanah",
+        fotoWakil: "img/fatihah rizqia.png",
+        staf: []
+      },
+      {
+        id: 8,
+        nama: "Divisi Kepramukaan",
+        menteri: "Seswa Adi Wiyana",
+        fotoMenteri: "img/seswa.png", 
+        wakil: "Keerane Mukti Al Karimah",
+        fotoWakil: "img/keerane.png",
+        staf: []
+      },
+      {
+        id: 9,
+        nama: "Divisi Kebahasaan",
+        menteri: "Radit Dwi Rahman",
+        fotoMenteri: "img/radit.png", 
+        wakil: "Jihan Mutia Ardhaneswari ",
+        fotoWakil: "img/jihan mutia.png",
+        staf: []
+      },
+      {
+        id: 10,
+        nama: "Divisi Informasi Dokumentasi",
+        menteri: "Edelweiss Dalila Ayatillah",
+        fotoMenteri: "img/edelweiss.png", 
+        wakil: "Arsil Ibnu Rosyid",
+        fotoWakil: "img/arsil.png",
         staf: []
       }
     ]
@@ -52,16 +123,17 @@ const dataMPK = {
   // ================= GEDUNG TANSRI =================
   tansri: {
     bph: {
-      ketua: { nama: "Attaya Fikri Rizqullah Sitompul", foto: "" },
+      ketua: { nama: "Attaya Fikri Rizqullah Sitompul", foto: "img/attaya.png" },
       wakil: [
-        { nama: "Maulida", foto: "" }
+        { nama: "Maulidha Sophia", foto: "img/maulidha.png" }
       ],
       sekretaris: [
-        { nama: "orang", foto: "" },
-        { nama: "manusia", foto:""}
+        { nama: "Alif Rizal Ramadhan", foto: "img/alif.png" },
+        { nama: "Syafira Khoirun Nissa ", foto:"img/syafira khoirun.png"}
       ],
       bendahara: [
-        { nama: "orang", foto: "" }
+        { nama: "Rahma Dawlati Gemilang", foto: "img/rahma.png" },
+        { nama: "Rizqi Muhammad Satria ", foto: "img/risqi m.png"}
       ]
     },
     divisi: [
@@ -69,19 +141,91 @@ const dataMPK = {
         id: 1,
         nama: "Divisi Humas",
         menteri: "Ananda Satria Rinjanie ",
-        fotoMenteri: "",
+        fotoMenteri: "img/ananda satria.png",
         wakil: "Syafa Khusnul Kamila",
-        fotoWakil: "",
+        fotoWakil: "img/syafa khusnul.png",
         staf: []
       },
       {
         id: 2,
         nama: "Divisi Ekonomi",
         menteri: "Sulton Hidayat",
-        fotoMenteri: "",
+        fotoMenteri: "img/sulton.png",
         wakil: "Anugerah Rizky Aulia",
-        fotoWakil: "",
+        fotoWakil: "img/aul.png",
         staf: [] 
+      },
+      {
+        id: 3,
+        nama: "Divisi Peribadatan",
+        menteri: "Nazam Alfarizi",
+        fotoMenteri: "img/nazam.png",
+        wakil: "Ridha Nurul Muarifah ",
+        fotoWakil: "img/ridha.png",
+        staf: ["Rafli Adzanur Ramadhan"]
+      },
+      {
+        id: 4,
+        nama: "Divisi Disterham",
+        menteri: "Zulfikar Albadar",
+        fotoMenteri: "img/badar.png",
+        wakil: "Putri Aizy Rukhin",
+        fotoWakil: "img/Putri aizy.png",
+        staf: []
+      },
+      {
+        id: 5,
+        nama: "Divisi Sora",
+        menteri: "Saskie Gita Anara",
+        fotoMenteri: "img/saskie.png",
+        wakil: "Bima Gumilang",
+        fotoWakil: "img/bima.png",
+        staf: []
+      },
+      {
+        id: 6,
+        nama: "Divisi Ekstrakulikuler",
+        menteri: "Asyraf Khairul Azam",
+        fotoMenteri: "img/asyraf.png",
+        wakil: "Resqiya Al Farisza Sain",
+        fotoWakil: "img/resqiya al.png",
+        staf: []
+      },
+      {
+        id: 7,
+        nama: "Divisi Gizi kesehatan",
+        menteri: "Ilmi Kautsar Averoes",
+        fotoMenteri: "img/ilmi.png",
+        wakil: "Tazkiyatul Nailal Muna ",
+        fotoWakil: "img/tazkiyatul.png",
+        staf: []
+      },
+      {
+        id: 8,
+        nama: "Divisi Kepramukaan",
+        menteri: "Kachla Hutama Nasution",
+        fotoMenteri: "img/kachla.png",
+        wakil: "Wahyu Sekar Aji",
+        fotoWakil: "img/wahyu.png",
+        staf: []
+      },
+      {
+        id: 9,
+        nama: "Divisi Kebahasaan",
+        menteri: "Zaky Fathir Rabbani",
+        fotoMenteri: "img/zaky.png",
+        wakil: "Atiqa Zivilia Aini ",
+        fotoWakil: "img/atiqa.png",
+        staf: []
+      },
+      {
+        id: 10,
+        nama: "Divisi Informasi Dokumentasi",
+        menteri: "Madina Sya'bani Rahman ",
+        fotoMenteri: "img/madina.png",
+        wakil: "Khodad Asidad",
+        fotoWakil: "img/khodad.png",
+        staf: ["Rafli Adzanur Ramadhan"]
       }
     ]
   }
