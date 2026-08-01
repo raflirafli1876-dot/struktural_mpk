@@ -473,3 +473,74 @@ header h1 {
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 900px) {
+  /* Fix Padding & Spasi Utama */
+  body {
+    padding: 20px 12px;
+  }
+  header h1 {
+    font-size: 2.2rem;
+    letter-spacing: normal;
+  }
+  .brand-badge {
+    font-size: 0.9rem;
+    padding: 6px 16px;
+  }
+
+  /* Fix Tombol Tab Gedung agar Tidak Meluber */
+  .controls {
+    padding: 8px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+  }
+  .tabs {
+    width: 100%;
+    gap: 8px;
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 12px 10px;
+    font-size: 0.95rem;
+    border-radius: 12px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  /* Fix Mindmap Container agar BISA DISCROLL Kesamping dengan Rapi */
+  .mindmap-wrapper {
+    padding: 40px 15px;
+    border-radius: 20px;
+    /* Aktifkan smooth scroll touch untuk HP */
+    -webkit-overflow-scrolling: touch; 
+  }
+  
+  /* Perkecil node mindmap khusus layar HP biar pas dipandang */
+  .mindmap-tree {
+    min-width: 850px; /* Diturunkan dari 1100px agar tidak terlalu panjang */
+    gap: 50px;
+  }
+  .node {
+    padding: 16px 20px;
+  }
+  .node .name {
+    font-size: 1.1rem;
+  }
+  .node-avatar {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  .node.root .node-avatar {
+    width: 100px !important;
+    height: 100px !important;
+  }
+
+  /* Fix Grid Divisi (1 Kolom di HP) */
+  .division-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .div-card {
+    padding: 20px;
+  }
+}
