@@ -162,7 +162,7 @@ const dataMPK = {
         fotoMenteri: "img/nazam.png",
         wakil: "Ridha Nurul Muarifah ",
         fotoWakil: "img/ridha.png",
-        staf: ["Rafli Adzanur R","Amalia Khairani Salsabillah","Afrah Naira Hamna","Ahmad Rifai Akbar","Hafiz Yasin","Genio Abid A.","Dhaniswara T","Aris Zibran Al-Hajj","Fikri Kurniawan","Aulia Azmi","Adila Arifiana","Dennisa Nigella"]
+        staf: ["Rafli Adzanur Ramadhan","Amalia Khairani Salsabillah","Afrah Naira Hamna","Ahmad Rifai Akbar","Hafiz Yasin","Genio Abid A.","Dhaniswara T","Aris Zibran Al-Hajj","Fikri Kurniawan","Aulia Azmi","Adila Arifiana","Dennisa Nigella"]
       },
       {
         id: 4,
@@ -225,7 +225,7 @@ const dataMPK = {
         fotoMenteri: "img/khodad.png",
         wakil: "Madina Sya'bani Rahman ",
         fotoWakil: "img/madina.png",
-        staf: ["Rafli Adzanur R","Aris Zibran Al-Hajj","Yusuf Hafidhudin"]
+        staf: ["Rafli Adzanur Ramadhan","Aris Zibran Al-Hajj","Yusuf Hafidhudin"]
       }
     ]
   }
@@ -254,29 +254,20 @@ function getAvatarSrc(src) {
 
 /**
  * Me-render daftar divisi ke dalam DOM.
+ * Staf muncul hanya saat card diklik (toggle panel).
  */
 function renderDivisi(elementId, listDivisi) {
   const el = document.getElementById(elementId);
   if (!el) return;
 
   el.innerHTML = listDivisi.map(div => `
-    <div class="div-card">
-      <div class="staff-popover">
-        <div class="popover-title">
-          <span>Daftar Staf / Partner</span>
-          <span>${div.staf ? div.staf.length : 0} Orang</span>
-        </div>
-        <div class="staff-list">
-          ${div.staf && div.staf.length > 0
-            ? div.staf.map(s => `<div class="staff-item">• ${s}</div>`).join('')
-            : '<div class="staff-item">Tidak ada staf</div>'
-          }
-        </div>
-      </div>
-
+    <div class="div-card" data-divisi-id="${div.id}" tabindex="0" role="button" aria-expanded="false">
       <div class="div-header">
         <span class="div-title">${div.nama}</span>
-        <span class="div-badge">#${div.id}</span>
+        <div class="div-header-right">
+          <span class="div-badge">#${div.id}</span>
+          <span class="div-toggle-icon" aria-hidden="true">▼</span>
+        </div>
       </div>
 
       <div class="div-members-grid">
@@ -294,8 +285,51 @@ function renderDivisi(elementId, listDivisi) {
           <div class="member-name">${div.wakil}</div>
         </div>
       </div>
+
+      <!-- Panel Staf (muncul saat diklik) -->
+      <div class="staff-panel" aria-hidden="true">
+        <div class="staff-panel-header">
+          <span>Daftar Staf / Partner</span>
+          <span class="staff-count-badge">${div.staf ? div.staf.length : 0} Orang</span>
+        </div>
+        <div class="staff-list">
+          ${div.staf && div.staf.length > 0
+            ? div.staf.map(s => `<div class="staff-item">• ${s}</div>`).join('')
+            : '<div class="staff-item staff-empty">Belum ada data staf</div>'
+          }
+        </div>
+      </div>
     </div>
   `).join('');
+
+  // Attach click (dan keyboard) event ke setiap card
+  el.querySelectorAll('.div-card').forEach(card => {
+    const toggle = () => {
+      const isOpen = card.classList.contains('open');
+      // Tutup semua card lain dulu
+      el.querySelectorAll('.div-card.open').forEach(c => {
+        c.classList.remove('open');
+        c.setAttribute('aria-expanded', 'false');
+        const panel = c.querySelector('.staff-panel');
+        if (panel) panel.setAttribute('aria-hidden', 'true');
+      });
+      // Buka/tutup card ini
+      if (!isOpen) {
+        card.classList.add('open');
+        card.setAttribute('aria-expanded', 'true');
+        const panel = card.querySelector('.staff-panel');
+        if (panel) panel.setAttribute('aria-hidden', 'false');
+      }
+    };
+
+    card.addEventListener('click', toggle);
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle();
+      }
+    });
+  });
 }
 
 /**
