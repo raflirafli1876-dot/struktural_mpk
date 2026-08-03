@@ -162,7 +162,7 @@ const dataMPK = {
         fotoMenteri: "img/nazam.png",
         wakil: "Ridha Nurul Muarifah ",
         fotoWakil: "img/ridha.png",
-        staf: ["Rafli Adzanur Ramadhan"]
+        staf: ["Rafli Adzanur R","Amalia Khairani Salsabillah","Afrah Naira Hamna","Ahmad Rifai Akbar","Hafiz Yasin","Genio Abid A.","Dhaniswara T","Aris Zibran Al-Hajj","Fikri Kurniawan","Aulia Azmi","Adila Arifiana","Dennisa Nigella"]
       },
       {
         id: 4,
@@ -225,7 +225,7 @@ const dataMPK = {
         fotoMenteri: "img/khodad.png",
         wakil: "Madina Sya'bani Rahman ",
         fotoWakil: "img/madina.png",
-        staf: ["Rafli Adzanur Ramadhan"]
+        staf: ["Rafli Adzanur R","Aris Zibran Al-Hajj","Yusuf Hafidhudin"]
       }
     ]
   }
@@ -234,8 +234,8 @@ const dataMPK = {
 // State gedung aktif
 let activeGedung = 'utsman';
 
-// Inline SVG Avatar default yang indah (Gradient Biru dengan siluet modern)
-const DEFAULT_AVATAR = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'><rect width='100' height='100' rx='50' fill='url(%23gradient)'/><path d='M50 30a14 14 0 1 0 0 28 14 14 0 0 0 0-28zm0 34c-16.57 0-30 8.06-30 18v2h60v-2c0-9.94-13.43-18-30-18z' fill='%23ffffff' opacity='0.85'/><defs><linearGradient id='gradient' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%233b82f6'/><stop offset='100%25' stop-color='%231d4ed8'/></linearGradient></defs></svg>`;
+// Inline SVG Avatar default yang indah (Gradient Hijau Sage dengan siluet modern)
+const DEFAULT_AVATAR = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'><rect width='100' height='100' rx='50' fill='url(%23gradient)'/><path d='M50 30a14 14 0 1 0 0 28 14 14 0 0 0 0-28zm0 34c-16.57 0-30 8.06-30 18v2h60v-2c0-9.94-13.43-18-30-18z' fill='%23ffffff' opacity='0.85'/><defs><linearGradient id='gradient' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%238caf95'/><stop offset='100%25' stop-color='%234a614e'/></linearGradient></defs></svg>`;
 
 /**
  * Mendapatkan source avatar gambar.
@@ -436,3 +436,93 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Gambar ulang garis saat resize window
 window.addEventListener('resize', drawMindmapLines);
+
+// ===============================================
+// DATA TIM PENGEMBANG
+// ===============================================
+const timPengembang = [
+  {
+    nama: "Rafli Adzanur Ramadhan",
+    kelas: "XA - Pertanian",
+    noId: "20230323",
+    foto: "",
+    portofolio: "https://rafliadzanurramadhan.vercel.app/"
+  },
+  {
+    nama: "",
+    kelas: "",
+    noId: "",
+    foto: "",
+    portofolio: ""
+  }
+];
+
+// ===============================================
+// FUNGSI MODAL TIM PENGEMBANG
+// ===============================================
+
+/**
+ * Membuka modal tim pengembang dan mengisi kartu anggota.
+ */
+function openTimPengembangModal() {
+  const modal = document.getElementById('modal-tim-pengembang');
+  const grid = document.getElementById('tim-pengembang-grid');
+  if (!modal || !grid) return;
+
+  grid.innerHTML = timPengembang.map(orang => `
+    <div class="tim-card">
+      <img
+        src="${getAvatarSrc(orang.foto)}"
+        alt="${orang.nama}"
+        class="tim-card-foto"
+      >
+      <div class="tim-card-nama">${orang.nama}</div>
+      <div class="tim-card-kelas">${orang.kelas}</div>
+      <div class="tim-card-id">No. ID: ${orang.noId}</div>
+      ${orang.portofolio && orang.portofolio !== '#'
+        ? `<a href="${orang.portofolio}" target="_blank" rel="noopener noreferrer" class="tim-card-porto-btn">Lihat Portofolio</a>`
+        : `<span class="tim-card-porto-btn disabled">Lihat Portofolio</span>`
+      }
+    </div>
+  `).join('');
+
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Menutup modal tim pengembang.
+ */
+function closeTimPengembangModal() {
+  const modal = document.getElementById('modal-tim-pengembang');
+  if (!modal) return;
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Event listener untuk modal (di-attach setelah DOM ready)
+document.addEventListener('DOMContentLoaded', () => {
+  const btnTimPengembang = document.getElementById('btn-tim-pengembang');
+  const modalOverlay = document.getElementById('modal-tim-pengembang');
+  const btnTutupModal = document.getElementById('btn-tutup-modal');
+
+  if (btnTimPengembang) {
+    btnTimPengembang.addEventListener('click', openTimPengembangModal);
+  }
+
+  if (btnTutupModal) {
+    btnTutupModal.addEventListener('click', closeTimPengembangModal);
+  }
+
+  // Klik di luar modal = tutup
+  if (modalOverlay) {
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) closeTimPengembangModal();
+    });
+  }
+
+  // Tekan ESC = tutup modal
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeTimPengembangModal();
+  });
+});

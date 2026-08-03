@@ -14,9 +14,12 @@
 
   <div class="container">
     <header>
+        <div class="developer">
+          <button id="btn-tim-pengembang">Tim Pengembang</button>
+        </div>
       <div class="logo-container">
         <img src="img/Logo_xxvganespic.png" alt="Logo-GANESPIC" class="header-logo">
-      </div>
+        </div>
       <span class="brand-badge">ANGKATAN XXV</span>
       <p class="motto">Melangkah Kedepan Menuju Kemenangan</p>
       <h1>Majelis Perwakilan Kelas GANESPIC</h1>
@@ -65,9 +68,17 @@
       <div class="division-grid" id="list-divisi"></div>
     </div>
   </div>
+  <!-- Modal Tim Pengembang -->
+  <div id="modal-tim-pengembang" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2 class="modal-title">Tim Pengembang</h2>
+        <button id="btn-tutup-modal" class="modal-close-btn" aria-label="Tutup modal">&times;</button>
+      </div>
+      <div id="tim-pengembang-grid" class="tim-pengembang-grid"></div>
+    </div>
+  </div>
 
-  <footer style="text-align: center; padding: 40px; font-size: 1.3em;"><p>By Rafli - informasi publikasi</p></footer>
-  
   <script src="script.js"></script>
 </body>
 </html>
