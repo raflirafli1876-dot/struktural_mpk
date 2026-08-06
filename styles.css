@@ -34,7 +34,8 @@ body {
   padding: 15px;
 }
 
-.developer #btn-tim-pengembang {
+.developer #btn-tim-pengembang,
+.developer #btn-dark-mode {
   font-size: 1.1em;
   font-weight: 800;
   color: #ffffff;
@@ -48,7 +49,8 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
-.developer #btn-tim-pengembang:hover {
+.developer #btn-tim-pengembang:hover,
+.developer #btn-dark-mode:hover {
   background-color: rgba(98, 233, 127, 0.988);
 }
 
@@ -772,4 +774,155 @@ header h1 {
   .modal-title {
     font-size: 1.5rem;
   }
+}
+
+/* ======================================= */
+/* DARK MODE                               */
+/* ======================================= */
+
+/* Variabel dark mode — warna hijau TIDAK berubah */
+body.dark {
+  --bg-card: #1e1e1e;
+  --border-color: #3a3a3a;
+  --text-muted: #e0e0e0;
+  border-color: #333333;
+}
+
+/* Background body tetap hijau, hanya border body yang gelap */
+body.dark {
+  border-color: #333333;
+}
+
+/* Tombol dark mode saat aktif */
+body.dark #btn-dark-mode {
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #000000;
+}
+
+/* Controls / tab bar */
+body.dark .controls {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+
+/* Tab button */
+body.dark .tab-btn {
+  color: #cccccc;
+  border-color: var(--border-color);
+}
+
+body.dark .tab-btn:hover {
+  color: var(--primary-accent);
+  border-color: var(--primary-accent);
+}
+
+/* Node default (bph non-root) */
+body.dark .node {
+  background: #1e1e1e;
+  border-color: var(--border-color);
+}
+
+body.dark .node .name {
+  color: #e0e0e0;
+}
+
+/* Node root & ketua-gedung tetap hijau, tidak perlu override */
+
+/* Mindmap wrapper */
+body.dark .mindmap-wrapper {
+  background: #1e1e1e;
+  border-color: var(--border-color);
+}
+
+/* Kartu divisi */
+body.dark .div-card {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+body.dark .div-title {
+  color: #e0e0e0;
+}
+
+body.dark .div-badge {
+  color: #cccccc;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+body.dark .div-header {
+  border-bottom-color: var(--border-color);
+}
+
+/* Member box dalam kartu divisi */
+body.dark .member-box {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--border-color);
+}
+
+body.dark .member-name {
+  color: #e0e0e0;
+}
+
+/* Staff panel */
+body.dark .staff-panel-header {
+  border-top-color: var(--border-color);
+}
+
+body.dark .staff-item {
+  color: #cccccc;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--border-color);
+}
+
+/* Modal */
+body.dark .modal-box {
+  background: #1a1a1a;
+  border-color: var(--primary-accent);
+}
+
+body.dark .modal-header {
+  border-bottom-color: var(--border-color);
+}
+
+body.dark .modal-title {
+  color: #e0e0e0;
+}
+
+body.dark .modal-close-btn {
+  color: #e0e0e0;
+  border-color: var(--border-color);
+}
+
+body.dark .modal-close-btn:hover {
+  background: var(--primary-accent);
+  border-color: var(--primary-accent);
+  color: #000000;
+}
+
+/* Tim card */
+body.dark .tim-card {
+  background: #252525;
+  border-color: var(--border-color);
+}
+
+body.dark .tim-card-nama {
+  color: #e0e0e0;
+}
+
+body.dark .tim-card-id {
+  color: #aaaaaa;
+}
+
+body.dark .tim-card-porto-btn {
+  background: #333333;
+  border-color: #555555;
+  color: #e0e0e0;
+}
+
+body.dark .tim-card-porto-btn:hover {
+  background: var(--primary-accent);
+  border-color: var(--primary-accent);
+  color: #000000;
 }

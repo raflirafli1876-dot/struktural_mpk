@@ -560,3 +560,42 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape') closeTimPengembangModal();
   });
 });
+
+// ===============================================
+// DARK MODE TOGGLE
+// ===============================================
+
+/**
+ * Mengaktifkan atau menonaktifkan dark mode.
+ * Hanya warna putih/abu yang berubah — warna hijau tetap.
+ */
+function setDarkMode(enabled) {
+  const btn = document.getElementById('btn-dark-mode');
+  if (enabled) {
+    document.body.classList.add('dark');
+    if (btn) btn.textContent = '☀️ Light Mode';
+    localStorage.setItem('darkMode', 'on');
+  } else {
+    document.body.classList.remove('dark');
+    if (btn) btn.textContent = '🌙 Dark Mode';
+    localStorage.setItem('darkMode', 'off');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const btnDark = document.getElementById('btn-dark-mode');
+
+  // Terapkan preferensi yang tersimpan
+  const savedMode = localStorage.getItem('darkMode');
+  if (savedMode === 'on') {
+    setDarkMode(true);
+  }
+
+  // Klik tombol toggle
+  if (btnDark) {
+    btnDark.addEventListener('click', () => {
+      const isDark = document.body.classList.contains('dark');
+      setDarkMode(!isDark);
+    });
+  }
+});
