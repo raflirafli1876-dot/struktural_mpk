@@ -479,7 +479,7 @@ const timPengembang = [
     nama: "Rafli Adzanur Ramadhan",
     kelas: "XA - Pertanian",
     noId: "20230323",
-    foto: "",
+    foto: "img/IMG_20260804_111113_986.jpg",
     portofolio: "https://rafliadzanurramadhan.vercel.app/"
   },
   {
