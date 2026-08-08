@@ -472,7 +472,7 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('resize', drawMindmapLines);
 
 // ===============================================
-// DATA TIM PENGEMBANG
+// DATA DEVELOPER
 // ===============================================
 const timPengembang = [
   {
@@ -492,11 +492,11 @@ const timPengembang = [
 ];
 
 // ===============================================
-// FUNGSI MODAL TIM PENGEMBANG
+// FUNGSI MODAL DEVELOPER
 // ===============================================
 
 /**
- * Membuka modal tim pengembang dan mengisi kartu anggota.
+ * Membuka modal developer dan mengisi kartu anggota.
  */
 function openTimPengembangModal() {
   const modal = document.getElementById('modal-tim-pengembang');
@@ -525,7 +525,7 @@ function openTimPengembangModal() {
 }
 
 /**
- * Menutup modal tim pengembang.
+ * Menutup modal developer.
  */
 function closeTimPengembangModal() {
   const modal = document.getElementById('modal-tim-pengembang');
