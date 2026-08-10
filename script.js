@@ -483,11 +483,11 @@ const timPengembang = [
     portofolio: "https://rafliadzanurramadhan.vercel.app/"
   },
   {
-    nama: "",
-    kelas: "",
-    noId: "",
-    foto: "",
-    portofolio: ""
+    nama: "Attaya Fikri Rizqullah Sitompul",
+    kelas: "XB - Pertanian",
+    noId: "20230069",
+    foto: "attaya.png",
+    portofolio: "https://portofolioattaya.netlify.app/"
   }
 ];
 
