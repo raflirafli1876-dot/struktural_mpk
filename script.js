@@ -486,7 +486,7 @@ const timPengembang = [
     nama: "Attaya Fikri Rizqullah Sitompul",
     kelas: "XB - Pertanian",
     noId: "20230069",
-    foto: "attaya.png",
+    foto: "img/attaya.png",
     portofolio: "https://portofolioattaya.netlify.app/"
   }
 ];
