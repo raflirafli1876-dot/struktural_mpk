@@ -619,8 +619,8 @@ header h1 {
   background: #ffffff;
   border-radius: 28px;
   padding: 40px;
-  width: 100%;
-  max-width: 900px;
+  width: fit-content;
+  max-width: min(900px, 100%);
   max-height: 85vh;
   overflow-y: auto;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
@@ -679,8 +679,9 @@ header h1 {
 
 /* Grid kartu anggota tim */
 .tim-pengembang-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 24px;
 }
 
@@ -695,6 +696,8 @@ header h1 {
   border-radius: 20px;
   padding: 24px 16px;
   transition: all 0.25s ease;
+  width: 260px;
+  max-width: 100%;
 }
 
 .tim-card:hover {
@@ -766,9 +769,13 @@ header h1 {
   .modal-box {
     padding: 24px 16px;
     border-radius: 20px;
+    width: fit-content;
+    max-width: 100%;
   }
   .tim-pengembang-grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 16px;
   }
   .modal-title {
