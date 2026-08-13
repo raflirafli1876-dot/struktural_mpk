@@ -824,6 +824,15 @@ body.dark .tab-btn:hover {
   border-color: var(--primary-accent);
 }
 
+/* ─── PERBAIKAN UTAMA ─── */
+/* Tombol tab aktif di dark mode: teks hitam agar kontras dengan latar hijau */
+body.dark .tab-btn.active {
+  color: #000000;                  /* teks hitam */
+  background: var(--primary-accent); /* tetap hijau terang */
+  border-color: var(--primary-accent);
+  box-shadow: 0 6px 20px var(--primary-glow);
+}
+
 /* Node default (bph non-root) */
 body.dark .node {
   background: #1e1e1e;
