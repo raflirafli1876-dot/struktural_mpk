@@ -253,6 +253,70 @@ function getAvatarSrc(src) {
 }
 
 /**
+ * Membuka modal profil dengan data anggota yang tersedia di struktur MPK.
+ */
+function openProfileModal(profile) {
+  const modal = document.getElementById('modal-profil-anggota');
+  const foto = document.getElementById('profil-foto');
+  const nama = document.getElementById('profil-nama');
+  const jabatan = document.getElementById('profil-jabatan');
+  const btnTutup = document.getElementById('btn-tutup-profil');
+
+  if (!modal || !foto || !nama || !jabatan) return;
+
+  foto.src = getAvatarSrc(profile.foto);
+  foto.alt = `Foto ${profile.nama}`;
+  nama.textContent = profile.nama;
+  jabatan.textContent = profile.jabatan;
+  modal.classList.add('active');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  if (btnTutup) btnTutup.focus();
+}
+
+/**
+ * Menutup modal profil anggota.
+ */
+function closeProfileModal() {
+  const modal = document.getElementById('modal-profil-anggota');
+  if (!modal) return;
+
+  modal.classList.remove('active');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+/**
+ * Menjadikan kartu anggota dapat membuka modal profil lewat mouse dan keyboard.
+ */
+function bindProfileTrigger(element, profile) {
+  if (!element) return;
+
+  element._profileData = profile;
+  element.classList.add('profile-trigger');
+  element.setAttribute('role', 'button');
+  element.setAttribute('tabindex', '0');
+  element.setAttribute('aria-haspopup', 'dialog');
+  element.setAttribute('aria-label', `Lihat profil ${profile.nama}`);
+
+  if (element.dataset.profileBound === 'true') return;
+  element.dataset.profileBound = 'true';
+
+  element.addEventListener('click', event => {
+    event.stopPropagation();
+    openProfileModal(element._profileData);
+  });
+
+  element.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      event.stopPropagation();
+      openProfileModal(element._profileData);
+    }
+  });
+}
+
+/**
  * Me-render daftar divisi ke dalam DOM.
  * Staf muncul hanya saat card diklik (toggle panel).
  */
@@ -271,17 +335,17 @@ function renderDivisi(elementId, listDivisi) {
       </div>
 
       <div class="div-members-grid">
-        <!-- Menteri -->
+        <!-- Ketua Divisi -->
         <div class="member-box">
           <img src="${getAvatarSrc(div.fotoMenteri)}" alt="${div.menteri}" class="member-avatar">
-          <div class="member-label">Menteri</div>
+          <div class="member-label">Ketua Divisi</div>
           <div class="member-name">${div.menteri}</div>
         </div>
 
-        <!-- Wakil Menteri -->
+        <!-- Wakil Divisi -->
         <div class="member-box">
           <img src="${getAvatarSrc(div.fotoWakil)}" alt="${div.wakil}" class="member-avatar">
-          <div class="member-label">Wakil Menteri</div>
+          <div class="member-label">Wakil Divisi</div>
           <div class="member-name">${div.wakil}</div>
         </div>
       </div>
@@ -303,7 +367,8 @@ function renderDivisi(elementId, listDivisi) {
   `).join('');
 
   // Attach click (dan keyboard) event ke setiap card
-  el.querySelectorAll('.div-card').forEach(card => {
+  el.querySelectorAll('.div-card').forEach((card, index) => {
+    const div = listDivisi[index];
     const toggle = () => {
       const isOpen = card.classList.contains('open');
       // Tutup semua card lain dulu
@@ -328,6 +393,29 @@ function renderDivisi(elementId, listDivisi) {
         e.preventDefault();
         toggle();
       }
+    });
+
+    const memberBoxes = card.querySelectorAll('.member-box');
+    bindProfileTrigger(memberBoxes[0], {
+      nama: div.menteri,
+      foto: div.fotoMenteri,
+      jabatan: 'Ketua Divisi',
+      unit: div.nama
+    });
+    bindProfileTrigger(memberBoxes[1], {
+      nama: div.wakil,
+      foto: div.fotoWakil,
+      jabatan: 'Wakil Divisi',
+      unit: div.nama
+    });
+
+    card.querySelectorAll('.staff-item:not(.staff-empty)').forEach((staffItem, staffIndex) => {
+      bindProfileTrigger(staffItem, {
+        nama: div.staf[staffIndex],
+        foto: '',
+        jabatan: 'Staf / Partner',
+        unit: div.nama
+      });
     });
   });
 }
@@ -399,7 +487,7 @@ function drawMindmapLines() {
 /**
  * Merender satu kolom BPH (Wakil, Sekretaris, Bendahara) secara dinamis.
  */
-function renderBphColumn(columnId, roleLabel, members, idPrefix) {
+function renderBphColumn(columnId, roleLabel, members, idPrefix, gedungName) {
   const colEl = document.getElementById(columnId);
   if (!colEl) return;
 
@@ -410,6 +498,16 @@ function renderBphColumn(columnId, roleLabel, members, idPrefix) {
       <div class="name">${member.nama}</div>
     </div>
   `).join('');
+
+  colEl.querySelectorAll('.node').forEach((node, idx) => {
+    const member = members[idx];
+    bindProfileTrigger(node, {
+      nama: member.nama,
+      foto: member.foto,
+      jabatan: roleLabel,
+      unit: gedungName
+    });
+  });
 }
 
 /**
@@ -418,6 +516,7 @@ function renderBphColumn(columnId, roleLabel, members, idPrefix) {
 function renderGedung(gedungId) {
   const data = dataMPK[gedungId];
   if (!data) return;
+  const gedungName = `Gedung ${gedungId.charAt(0).toUpperCase() + gedungId.slice(1)}`;
 
   // Render Title Gedung
   const titleText = gedungId === 'utsman' ? 'Struktural Gedung Utsman' : 'Struktural Gedung Tansri';
@@ -426,16 +525,28 @@ function renderGedung(gedungId) {
   // Render Ketua Angkatan (Root)
   document.getElementById('ka-img').src = getAvatarSrc(dataMPK.fotoKetuaAngkatan);
   document.getElementById('ka-name').textContent = dataMPK.ketuaAngkatan;
+  bindProfileTrigger(document.getElementById('node-root'), {
+    nama: dataMPK.ketuaAngkatan,
+    foto: dataMPK.fotoKetuaAngkatan,
+    jabatan: 'Ketua Angkatan XXV',
+    unit: 'MPK GANESPIC XXV'
+  });
 
   // Render Ketua Gedung
   document.getElementById('kgedung-img').src = getAvatarSrc(data.bph.ketua.foto);
   document.getElementById('kgedung-name').textContent = data.bph.ketua.nama;
-  document.getElementById('kgedung-role').textContent = `Ketua MPK Gedung ${gedungId.charAt(0).toUpperCase() + gedungId.slice(1)}`;
+  document.getElementById('kgedung-role').textContent = `Ketua MPK ${gedungName}`;
+  bindProfileTrigger(document.getElementById('node-ketua'), {
+    nama: data.bph.ketua.nama,
+    foto: data.bph.ketua.foto,
+    jabatan: 'Ketua MPK',
+    unit: gedungName
+  });
 
   // Render Wakil, Sekretaris, Bendahara secara dinamis
-  renderBphColumn('col-wakil', 'Wakil Ketua', data.bph.wakil, 'wakil');
-  renderBphColumn('col-sekretaris', 'Sekretaris', data.bph.sekretaris, 'sekretaris');
-  renderBphColumn('col-bendahara', 'Bendahara', data.bph.bendahara, 'bendahara');
+  renderBphColumn('col-wakil', 'Wakil Ketua', data.bph.wakil, 'wakil', gedungName);
+  renderBphColumn('col-sekretaris', 'Sekretaris', data.bph.sekretaris, 'sekretaris', gedungName);
+  renderBphColumn('col-bendahara', 'Bendahara', data.bph.bendahara, 'bendahara', gedungName);
 
   // Render Daftar Divisi
   renderDivisi('list-divisi', data.divisi);
@@ -466,6 +577,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Load awal data
   renderGedung(activeGedung);
+});
+
+// Event listener untuk modal profil anggota
+document.addEventListener('DOMContentLoaded', () => {
+  const modalProfil = document.getElementById('modal-profil-anggota');
+  const btnTutupProfil = document.getElementById('btn-tutup-profil');
+
+  if (btnTutupProfil) btnTutupProfil.addEventListener('click', closeProfileModal);
+
+  if (modalProfil) {
+    modalProfil.addEventListener('click', event => {
+      if (event.target === modalProfil) closeProfileModal();
+    });
+  }
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeProfileModal();
+  });
 });
 
 // Gambar ulang garis saat resize window
