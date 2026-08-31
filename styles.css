@@ -322,7 +322,7 @@ header h1 { max-width: 850px; color: var(--forest); font-size: clamp(2rem, 4.3vw
 .tim-card-nama { margin-bottom: 4px; color: var(--forest); font-size: 1rem; font-weight: 780; line-height: 1.3; }
 .tim-card-kelas { margin-bottom: 4px; color: var(--emerald); font-size: 0.77rem; font-weight: 700; }
 .tim-card-id { margin-bottom: 16px; color: var(--ink-faint); font-size: 0.73rem; }
-.tim-card-porto-btn { min-height: 38px; padding: 8px 13px; color: white; border-color: var(--forest); background: var(--forest); box-shadow: none; }
+.tim-card-porto-btn { min-height: 38px; padding: 8px 13px; color: black; border-color: var(--forest); background: var(--forest); box-shadow: none; }
 .tim-card-porto-btn::after { content: "→"; font-size: 1rem; transition: transform var(--fast) ease-out; }
 .tim-card-porto-btn:hover { color: white; border-color: var(--emerald); background: var(--emerald); }
 .tim-card-porto-btn:hover::after { transform: translateX(3px); }

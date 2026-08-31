@@ -11,16 +11,15 @@ const dataMPK = {
   // ================= GEDUNG UTSMAN =================
   utsman: {
     bph: {
-      ketua: { nama: "Danish Mirza", foto: "img/Danish Mirza.png" },
+      ketua: { nama: "Arfina Tiara Khalisa", foto: "img/Arfina Tiara.png" },
       wakil: [
-        { nama: "Arfina Tiara Khalisa", foto: "img/Arfina Tiara.png" },
         { nama: "Ahmad Firdaus Al Farizi", foto: "img/ahmad firdaus.png" }
       ],
       sekretaris: [
         { nama: "Ilyas Rasyidin", foto: "img/ilyas.png" },
-        { nama: "Jian Kayla Alisyah", foto: "img/jian kayla.png" },
-        { nama: "Farras Putri Ardhiyanti ", foto: "img/farras.png" }
-      ],
+         { nama: "Farras Putri Ardhiyanti ", foto: "img/farras.png" },
+        { nama: "Jian Kayla Alisyah", foto: "img/jian kayla.png" }
+       ],
       bendahara: [
         { nama: "Salma Alfu Hasani", foto: "img/salma alfu.png" },
         { nama: "Hanif Abdullah Arsyad", foto: "img/hanif.png" }
