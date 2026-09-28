@@ -73,7 +73,7 @@ const dataMPK = {
       },
       {
         id: 6,
-        nama: "Divisi Ekstrakulikuler",
+        nama: "Divisi Ekstrakurikuler",
         menteri: "Muhamad Ibra ",
         fotoMenteri: "img/ibra.png", 
         wakil: "Tia Listiyana Putri",
@@ -183,7 +183,7 @@ const dataMPK = {
       },
       {
         id: 6,
-        nama: "Divisi Ekstrakulikuler",
+        nama: "Divisi Ekstrakurikuler",
         menteri: "Asyraf Khairul Azam",
         fotoMenteri: "img/asyraf.png",
         wakil: "Resqiya Al Farisza Sain",
@@ -192,7 +192,7 @@ const dataMPK = {
       },
       {
         id: 7,
-        nama: "Divisi Gizi kesehatan",
+        nama: "Divisi Gizi Kesehatan",
         menteri: "Ilmi Kautsar Averoes",
         fotoMenteri: "img/ilmi.png",
         wakil: "Tazkiyatul Nailal Muna ",
@@ -233,7 +233,7 @@ const dataMPK = {
 // State gedung aktif
 let activeGedung = 'utsman';
 
-// Inline SVG Avatar default yang indah (Gradient Hijau Sage dengan siluet modern)
+// Inline SVG avatar default dengan gradient hijau sage.
 const DEFAULT_AVATAR = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'><rect width='100' height='100' rx='50' fill='url(%23gradient)'/><path d='M50 30a14 14 0 1 0 0 28 14 14 0 0 0 0-28zm0 34c-16.57 0-30 8.06-30 18v2h60v-2c0-9.94-13.43-18-30-18z' fill='%23ffffff' opacity='0.85'/><defs><linearGradient id='gradient' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%238caf95'/><stop offset='100%25' stop-color='%234a614e'/></linearGradient></defs></svg>`;
 
 /**
@@ -317,7 +317,7 @@ function bindProfileTrigger(element, profile) {
 
 /**
  * Me-render daftar divisi ke dalam DOM.
- * Staf muncul hanya saat card diklik (toggle panel).
+ * Staf muncul saat kartu divisi dibuka.
  */
 function renderDivisi(elementId, listDivisi) {
   const el = document.getElementById(elementId);
@@ -352,13 +352,13 @@ function renderDivisi(elementId, listDivisi) {
       <!-- Panel Staf (muncul saat diklik) -->
       <div class="staff-panel" aria-hidden="true">
         <div class="staff-panel-header">
-          <span>Daftar Staf / Partner</span>
+          <span>Daftar Staf</span>
           <span class="staff-count-badge">${div.staf ? div.staf.length : 0} Orang</span>
         </div>
         <div class="staff-list">
           ${div.staf && div.staf.length > 0
             ? div.staf.map(s => `<div class="staff-item">• ${s}</div>`).join('')
-            : '<div class="staff-item staff-empty">Belum ada data staf</div>'
+            : '<div class="staff-item staff-empty">Data staf belum tersedia.</div>'
           }
         </div>
       </div>
@@ -392,29 +392,6 @@ function renderDivisi(elementId, listDivisi) {
         e.preventDefault();
         toggle();
       }
-    });
-
-    const memberBoxes = card.querySelectorAll('.member-box');
-    bindProfileTrigger(memberBoxes[0], {
-      nama: div.menteri,
-      foto: div.fotoMenteri,
-      jabatan: 'Ketua Divisi',
-      unit: div.nama
-    });
-    bindProfileTrigger(memberBoxes[1], {
-      nama: div.wakil,
-      foto: div.fotoWakil,
-      jabatan: 'Wakil Divisi',
-      unit: div.nama
-    });
-
-    card.querySelectorAll('.staff-item:not(.staff-empty)').forEach((staffItem, staffIndex) => {
-      bindProfileTrigger(staffItem, {
-        nama: div.staf[staffIndex],
-        foto: '',
-        jabatan: 'Staf / Partner',
-        unit: div.nama
-      });
     });
   });
 }

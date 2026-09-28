@@ -149,13 +149,7 @@ header { position: relative; display: grid; justify-items: center; padding: 16px
   background: rgba(215, 239, 221, 0.86);
 }
 
-.ket p{
-  text-align: center;
-  color: var(--emerald-bright);
-  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 16px;
-}
-
+.section-hint { margin: -8px 0 18px; color: var(--ink-soft); font-size: 0.85rem; }
 .motto { margin-bottom: 8px; color: var(--ink-soft); font-size: clamp(0.9rem, 1.3vw, 1.04rem); font-weight: 500; letter-spacing: 0.025em; }
 header h1 { max-width: 850px; color: var(--forest); font-size: clamp(2rem, 4.3vw, 4.15rem); font-weight: 850; letter-spacing: -0.055em; line-height: 1.04; text-wrap: balance; }
 
@@ -302,8 +296,6 @@ header h1 { max-width: 850px; color: var(--forest); font-size: clamp(2rem, 4.3vw
 .staff-count-badge { flex: 0 0 auto; padding: 4px 8px; color: var(--forest); font-size: 0.65rem; font-weight: 800; letter-spacing: normal; text-transform: none; border: 1px solid rgba(23, 122, 75, 0.16); border-radius: 999px; background: var(--mint); }
 .staff-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 .staff-item { min-width: 0; padding: 8px 10px; overflow: hidden; color: var(--ink-soft); font-size: 0.76rem; font-weight: 550; text-overflow: ellipsis; white-space: nowrap; border: 1px solid var(--line); border-radius: 8px; background: var(--surface-tint); animation: staff-in 300ms var(--ease-out) both; }
-.staff-item.profile-trigger { cursor: pointer; transition: color var(--fast) ease, border-color var(--fast) ease, background var(--fast) ease, transform var(--fast) ease; }
-.staff-item.profile-trigger:hover, .staff-item.profile-trigger:focus-visible { color: var(--forest); border-color: rgba(23, 122, 75, 0.48); background: var(--mint); transform: translateY(-1px); }
 .staff-item:nth-child(2) { animation-delay: 45ms; }
 .staff-item:nth-child(3) { animation-delay: 90ms; }
 .staff-item:nth-child(4) { animation-delay: 135ms; }
@@ -337,8 +329,6 @@ header h1 { max-width: 850px; color: var(--forest); font-size: clamp(2rem, 4.3vw
 
 /* ── Member profile modal ────────────────────────────────────────────── */
 .profile-trigger { cursor: pointer; }
-.member-box.profile-trigger { transition: transform var(--base) var(--ease-out), border-color var(--base) ease, box-shadow var(--base) ease, background var(--base) ease; }
-.member-box.profile-trigger:hover, .member-box.profile-trigger:focus-visible { border-color: rgba(23, 122, 75, 0.6); background: #eff9f0; box-shadow: 0 0 0 4px var(--glow-soft), 0 8px 18px rgba(18, 61, 42, 0.1); transform: translateY(-2px); }
 .profile-modal-box { position: relative; width: min(100%, 430px); padding: 38px 30px 30px; overflow: hidden; text-align: center; background: linear-gradient(155deg, #fbfffb 0%, #e0f3e4 100%); }
 .profile-modal-box::before { position: absolute; top: -124px; left: 50%; width: 300px; height: 260px; content: ""; pointer-events: none; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(ellipse, rgba(60, 170, 91, 0.27), transparent 68%); }
 .profile-close-btn { position: absolute; z-index: 2; top: 16px; right: 16px; }
@@ -390,7 +380,6 @@ body.dark .modal-box { background: #152219; }
 body.dark .div-card { background: rgba(23, 35, 27, 0.91); }
 body.dark .staff-item { background: #1c2d20; }
 body.dark .modal-close-btn { color: var(--ink-soft); background: #1d3023; }
-body.dark .member-box.profile-trigger:hover, body.dark .member-box.profile-trigger:focus-visible { background: #23432d; }
 body.dark .profile-modal-box { background: linear-gradient(155deg, #18291c, #123520); }
 body.dark .profile-nama { color: var(--ink); }
 
